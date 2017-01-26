@@ -1,0 +1,15 @@
+# (c) Copyright 2016 DataNexus Inc.  All Rights Reserved.
+---
+- name: creating datanexus-rpm-repo bucket
+  local_action:
+    module: s3
+    bucket: datanexus-rpm-repo
+    mode: create
+    region: "{{ ec2_region }}"
+  register: s3bucket
+
+
+- name: creating iam user
+  local_action:
+    module: iam
+    iam_type:

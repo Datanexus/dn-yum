@@ -1,0 +1,15 @@
+# (c) 2016 DataNexus Inc.  All Rights Reserved. 
+---
+# required definitions: host_inventory, application, ec2_region
+- name: creating a yum mirror
+  tags:
+    - "{{ application }}"
+  vars_files:
+    - "vars/yum-mirror.yml"
+  vars:
+      - combined_package_list: "{{ (default_packages|default([])) }}"
+  hosts: "{{ host_inventory }}"
+  roles:
+#    - { role: common/roles/install-packages, package_list: "{{ combined_package_list }}" }
+    - { role: dn-yum-mirror }
+    
